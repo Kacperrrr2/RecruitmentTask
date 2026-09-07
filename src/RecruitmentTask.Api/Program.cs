@@ -7,7 +7,9 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string mainFolderPath = Path.Combine(builder.Environment.ContentRootPath, "cat_facts.txt");
+var apiDir = new DirectoryInfo(builder.Environment.ContentRootPath);
+var solutionDir = apiDir.Parent?.Parent?.FullName ?? builder.Environment.ContentRootPath;
+string mainFolderPath= Path.Combine(solutionDir, "cat_facts.txt");
 builder.Services.AddTransient<IFactRepository>(sp => new TxtFactRepository(mainFolderPath));
 builder.Services.AddHttpClient<ICatFactApiClient, CatFactApiClient>();
 builder.Services.AddTransient<FetchAndSaveCatFactUseCase>();
