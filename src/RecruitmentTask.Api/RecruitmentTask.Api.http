@@ -1,0 +1,4 @@
+POST http://localhost:5102/api/cat-facts/fetch
+Accept: application/json
+
+###
